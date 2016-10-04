@@ -1,0 +1,64 @@
+{
+  "intents": [
+    {
+      "intent": "StopIntent"
+    },
+    {
+      "intent": "SetNumberIntent",
+      "slots": [
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "FreeTextIntent",
+      "slots": [
+        {
+          "name": "ta",
+          "type": "FREEFORM"
+        },
+        {
+          "name": "tb",
+          "type": "FREEFORM"
+        },
+        {
+          "name": "tc",
+          "type": "FREEFORM"
+        },
+        {
+          "name": "td",
+          "type": "FREEFORM"
+        } ,
+        {
+          "name": "te",
+          "type": "FREEFORM"
+        } ,
+        {
+          "name": "tf",
+          "type": "FREEFORM"
+        } ,
+        {
+          "name": "tg",
+          "type": "FREEFORM"
+        },
+        {
+          "name": "th",
+          "type": "FREEFORM"
+        },
+        {
+          "name": "ti",
+          "type": "FREEFORM"
+        } ,
+        {
+          "name": "tj",
+          "type": "FREEFORM"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}

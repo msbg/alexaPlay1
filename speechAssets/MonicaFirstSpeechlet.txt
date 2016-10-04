@@ -1,0 +1,14 @@
+StopIntent stop
+StopIntent end
+SetNumberIntent set to {number}
+SetNumberIntent set {number}
+FreeTextIntent {ta}
+FreeTextIntent {ta} {tb}
+FreeTextIntent {ta} {tb} {tc}
+FreeTextIntent {ta} {tb} {tc} {td}
+FreeTextIntent {ta} {tb} {tc} {td} {te}
+FreeTextIntent {ta} {tb} {tc} {td} {te} {tf}
+FreeTextIntent {ta} {tb} {tc} {td} {te} {tf} {tg}
+FreeTextIntent {ta} {tb} {tc} {td} {te} {tf} {tg} {th}
+FreeTextIntent {ta} {tb} {tc} {td} {te} {tf} {tg} {th} {ti}
+FreeTextIntent {ta} {tb} {tc} {td} {te} {tf} {tg} {th} {ti} {tj}

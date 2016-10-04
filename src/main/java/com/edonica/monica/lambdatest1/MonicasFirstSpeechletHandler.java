@@ -11,6 +11,6 @@ import java.util.Set;
  */
 public class MonicasFirstSpeechletHandler extends SpeechletRequestStreamHandler {
     public MonicasFirstSpeechletHandler() {
-        super(new MonicasFirstSpeechlet(), new HashSet<String>(Arrays.asList(new String[]{"amzn1.ask.skill.9ac905b0-c0f9-41f2-9a62-54469f022e58"})));
+        super(new MonicasFirstSpeechlet(), new HashSet<String>(Arrays.asList(new String[]{"amzn1.ask.skill.1743b9db-02f5-424b-ae86-746ad7bdde6a"})));
     }
 }
