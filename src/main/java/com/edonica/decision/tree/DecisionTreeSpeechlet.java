@@ -1,47 +1,51 @@
 package com.edonica.decision.tree;
 
 import com.amazon.speech.speechlet.*;
+import com.edonica.decision.tree.transitions.*;
 
 import java.util.*;
 
 public class DecisionTreeSpeechlet implements Speechlet {
 
     public DecisionTreeSpeechlet() {
-        Log("DecisionTreeSpeechlet created");
+        log("DecisionTreeSpeechlet created");
 
-        AddStateToMap(stateWelcome);
-        AddStateToMap(stateNewObj);
+        addStateToMap(stateWelcome);
+        addStateToMap(stateNewObj);
     }
 
-    void Log(String s) {
+    void log(String s) {
         System.out.println("Edonica " + s );
     }
 
     public void onSessionStarted(SessionStartedRequest intentRequest, Session session) throws SpeechletException {
-        Log("Session Start User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
+        log("Session Start User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
+        session.setAttribute(GameState.class.getName(), GameState.Welcome.toString());
     }
 
     public SpeechletResponse onLaunch(LaunchRequest intentRequest, Session session) throws SpeechletException {
-        Log("Launch with User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
+        log("Launch with User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
 
         String speechText = "Welcome to Decision Tree.  Say New Game to start";
-        session.setAttribute(StateGeneric.AttributeKeys.State, stateWelcome.getStateID());
 
-        return stateWelcome.MakeFullFatResponse(speechText);
+        return StateGeneric.makeFullFatResponse(speechText);
     }
 
     public SpeechletResponse onIntent(IntentRequest intentRequest, Session session) throws SpeechletException {
 
-        Request request = new Request(this, intentRequest, session);
+        RequestContext request = new RequestContext(this, intentRequest, session);
         request.DumpRequest();
+        GameState fromState = GameState.valueOf(request.getSessionString(GameState.class.getName()));
+        DataNode dn = null;
+        request.setDataNode(dn);
+        IntentName intentName = IntentName.valueOf(request.getIntentName());
+        TransitionRegistry transitionRegistry = new TransitionRegistry();
+        AbstractTransition transition = transitionRegistry.getTransition(fromState,intentName, dn);
+        log("Handling request in state " + fromState);
 
-        String stateName = request.getSessionString(StateGeneric.AttributeKeys.State);
+        //StateGeneric selectedIntent = states.getOrDefault(stateName, stateWelcome);
 
-        Log("Handling request in state " + stateName);
-
-        StateGeneric selectedIntent = States.getOrDefault(stateName, stateWelcome);
-
-        return selectedIntent.HandleRequest(request);
+        return transition.handleRequest(request);
 
     }
 
@@ -49,13 +53,13 @@ public class DecisionTreeSpeechlet implements Speechlet {
         System.out.println("Edonica Session End : " + request.toString() + ":" + session.toString());
     }
 
-    private void AddStateToMap(StateGeneric state) {
-        States.put(state.getStateID(), state);
+    private void addStateToMap(StateGeneric state) {
+        states.put(state.getStateID(), state);
     }
 
     public StateWelcome stateWelcome = new StateWelcome();
     public StateNewObj stateNewObj = new StateNewObj();
     private StateUnknown stateUnknown = new StateUnknown();
-    private Map<String,StateGeneric> States = new HashMap<String,StateGeneric>();
+    private Map<String,StateGeneric> states = new HashMap<String,StateGeneric>();
 
 }

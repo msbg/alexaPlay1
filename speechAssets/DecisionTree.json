@@ -1,9 +1,6 @@
 {
   "intents": [
     {
-      "intent": "IntentStop"
-    },
-    {
       "intent": "IntentNewGame"
     },
     {

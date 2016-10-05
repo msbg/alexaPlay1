@@ -1,4 +1,3 @@
-IntentStop stop
 IntentNewGame new game
 IntentGetNumber get number
 IntentSetNumber set to {number}

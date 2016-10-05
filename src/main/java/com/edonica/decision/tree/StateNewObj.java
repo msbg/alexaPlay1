@@ -10,13 +10,13 @@ public class StateNewObj extends StateGeneric {
 
     @Override
     public SpeechletResponse GetAmbientText() {
-        return MakeFullFatResponse("What were you thinking of?");
+        return makeFullFatResponse("What were you thinking of?");
     }
 
     @Override
-    public SpeechletResponse HandleRequest(Request request) {
+    public SpeechletResponse HandleRequest(RequestContext request) {
         if( request.getIntentName().equals(IntentNames.FreeText)) {
-            return MakeFullFatResponse("TODO - Persist this and set next state");
+            return makeFullFatResponse("TODO - Persist this and set next state");
         }
         return super.HandleRequest(request);
     }

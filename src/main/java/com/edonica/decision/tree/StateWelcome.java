@@ -9,7 +9,7 @@ public class StateWelcome extends StateGeneric {
         return "StateWelcome";
     }
 
-    public SpeechletResponse HandleRequest(Request request) {
+    public SpeechletResponse HandleRequest(RequestContext request) {
         String intentName = request.getIntentName();
         Log("StateWelcome handling " + intentName);
         if( intentName.equals(IntentNames.NewGame)) {
@@ -21,11 +21,11 @@ public class StateWelcome extends StateGeneric {
         else if(intentName.equals("IntentSetNumber")) {
             String number = request.getSlot("number");
             request.setSessionString("number", number);
-            return MakeFullFatResponse("Setting number to " + number);
+            return makeFullFatResponse("Setting number to " + number);
         }
         else if(intentName.equals("IntentGetNumber")) {
             String number = request.getSessionString("number");
-            return MakeFullFatResponse("Your session number is " + number);
+            return makeFullFatResponse("Your session number is " + number);
         } else {
             return super.HandleRequest(request);
         }
@@ -39,16 +39,16 @@ public class StateWelcome extends StateGeneric {
 /*
     public SpeechletResponse Activate() {
         if( intentName.equals(IntentNames.NewGame)) {
-            return MakeFullFatResponse("Now would be a good time to start a game");
+            return makeFullFatResponse("Now would be a good time to start a game");
         }
 
         else if(intentName.equals("IntentFreeText")) {
-            String speechText = request.GetStringFromComponents();
+            String speechText = request.getStringFromComponents();
             // Create the Simple card content.
-            return MakeFullFatResponse(speechText);
+            return makeFullFatResponse(speechText);
         }
         else {
-            return MakeFullFatResponse("Unrecognised intent " + intentName);
+            return makeFullFatResponse("Unrecognised intent " + intentName);
         }
     }
     */

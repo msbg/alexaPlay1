@@ -5,7 +5,7 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 public class StateUnknown extends StateGeneric {
     @Override
     public SpeechletResponse GetAmbientText() {
-        return MakeFullFatResponse("We are in an unknown state.  Maybe say 'Stop'");
+        return makeFullFatResponse("We are in an unknown state.  Maybe say 'Stop'");
     }
 
     @Override
@@ -14,7 +14,7 @@ public class StateUnknown extends StateGeneric {
     }
 
     @Override
-    public SpeechletResponse HandleRequest(Request request) {
+    public SpeechletResponse HandleRequest(RequestContext request) {
         return super.HandleRequest(request);
     }
 }

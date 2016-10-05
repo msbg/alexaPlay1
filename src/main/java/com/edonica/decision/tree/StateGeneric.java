@@ -13,10 +13,10 @@ public class StateGeneric {
     }
 
     public SpeechletResponse GetAmbientText() {
-        return MakeFullFatResponse("Ambient text - this should be more helpful");
+        return makeFullFatResponse("Ambient text - this should be more helpful");
     }
 
-    public SpeechletResponse HandleRequest(Request request) {
+    public SpeechletResponse HandleRequest(RequestContext request) {
         String intentName = request.getIntentName();
 
         if(intentName.equals(IntentNames.Stop)) {
@@ -35,12 +35,12 @@ public class StateGeneric {
         System.out.println("Edonica : " + s);
     }
 
-    void SetState(Request request, StateGeneric newState) {
+    void SetState(RequestContext request, StateGeneric newState) {
         Log("Switching from state " + getStateID() + " to " + newState.getStateID());
         request.setState(newState.getStateID());
     }
 
-    SpeechletResponse SetStateAndReturnText(Request request, StateGeneric newState) {
+    SpeechletResponse SetStateAndReturnText(RequestContext request, StateGeneric newState) {
         SetState(request, newState);
         return newState.GetAmbientText();
     }
@@ -55,7 +55,7 @@ public class StateGeneric {
         public static final String FreeText = "IntentFreeText";
     }
 
-    static public SpeechletResponse MakeFullFatResponse(String speechText) {
+    static public SpeechletResponse makeFullFatResponse(String speechText) {
         SimpleCard card = new SimpleCard();
         card.setTitle("Decision Tree");
         card.setContent(speechText);
