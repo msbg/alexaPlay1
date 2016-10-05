@@ -1,12 +1,6 @@
-package com.edonica.DecisionTree;
+package com.edonica.decision.tree;
 
-import com.amazon.speech.slu.Intent;
-import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.*;
-
-import com.amazon.speech.ui.PlainTextOutputSpeech;
-import com.amazon.speech.ui.Reprompt;
-import com.amazon.speech.ui.SimpleCard;
 
 import java.util.*;
 

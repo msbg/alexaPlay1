@@ -1,4 +1,4 @@
-package com.edonica.DecisionTree;
+package com.edonica.decision.tree;
 
 import static org.junit.Assert.*;
 

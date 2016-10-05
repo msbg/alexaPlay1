@@ -1,4 +1,4 @@
-package com.edonica.DecisionTree;
+package com.edonica.decision.tree;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;

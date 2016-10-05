@@ -1,4 +1,4 @@
-package com.edonica.DecisionTree;
+package com.edonica.decision.tree;
 
 
 public class GameHelper {
