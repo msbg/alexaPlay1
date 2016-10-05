@@ -14,112 +14,54 @@ public class DecisionTreeSpeechlet implements Speechlet {
 
     public DecisionTreeSpeechlet() {
         Log("DecisionTreeSpeechlet created");
+
+        AddStateToMap(stateWelcome);
+        AddStateToMap(stateNewObj);
     }
 
     void Log(String s) {
         System.out.println("Edonica " + s );
     }
 
-    public void onSessionStarted(SessionStartedRequest request, Session session) throws SpeechletException {
+    public void onSessionStarted(SessionStartedRequest intentRequest, Session session) throws SpeechletException {
         Log("Session Start User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
     }
 
-    public SpeechletResponse onLaunch(LaunchRequest request, Session session) throws SpeechletException {
+    public SpeechletResponse onLaunch(LaunchRequest intentRequest, Session session) throws SpeechletException {
         Log("Launch with User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
 
-        String speechText = "Welcome to Decision Tree";
+        String speechText = "Welcome to Decision Tree.  Say New Game to start";
+        session.setAttribute(StateGeneric.AttributeKeys.State, stateWelcome.getStateID());
 
-        // Create the Simple card content.
-        return MakeFullFatResponse(speechText);
+        return stateWelcome.MakeFullFatResponse(speechText);
     }
 
+    public SpeechletResponse onIntent(IntentRequest intentRequest, Session session) throws SpeechletException {
 
-    public SpeechletResponse onIntent(IntentRequest request, Session session) throws SpeechletException {
-        Intent intent = request.getIntent();
-        DumpRequest(request, session);
+        Request request = new Request(this, intentRequest, session);
+        request.DumpRequest();
 
-        String intentName = intent.getName();
+        String stateName = request.getSessionString(StateGeneric.AttributeKeys.State);
 
-        if(intentName.equals("IntentStop")) {
-            Log("Saying goodbyte");
+        Log("Handling request in state " + stateName);
 
-            PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-            speech.setText("Goodbye");
-            return SpeechletResponse.newTellResponse(speech);
-        }
-        else if(intentName.equals("IntentSetNumber")) {
-            String number = intent.getSlot("number").getValue();
-            session.setAttribute("Number", number);
-            // Create the Simple card content.
-            return MakeFullFatResponse("Setting number to " + number);
-        }
-        else if(intentName.equals("IntentGetNumber")) {
-            Object number = session.getAttribute("Number");
-            // Create the Simple card content.
-            return MakeFullFatResponse("Your session number is " + number);
-        }
-        else if(intentName.equals("IntentFreeText")) {
-            String speechText = GetStringFromComponents(intent);
-            // Create the Simple card content.
-            return MakeFullFatResponse(speechText);
-        }
-        else {
-            return MakeFullFatResponse("Unrecognised intent " + intentName);
-        }
-    }
+        StateGeneric selectedIntent = States.getOrDefault(stateName, stateWelcome);
 
-    private SpeechletResponse MakeFullFatResponse(String speechText) {
-        SimpleCard card = new SimpleCard();
-        card.setTitle("Decision Tree");
-        card.setContent(speechText);
+        return selectedIntent.HandleRequest(request);
 
-        // Create the plain text output.
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(speechText);
-
-        // Create reprompt
-        Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
-
-        return SpeechletResponse.newAskResponse(speech, reprompt, card);
-    }
-
-    private void DumpRequest(IntentRequest intentRequest, Session session) {
-        Intent intent = intentRequest.getIntent();
-
-        Log("OnIntent Intent: " + intent.getName() + " User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
-
-        for( Map.Entry<String, Slot> slotEntry : intent.getSlots().entrySet()) {
-            Slot slot = slotEntry.getValue();
-            Log("  Slot " + slotEntry.getKey() + " (" + slot.getName() + ") = " + slot.getValue() );
-        }
-
-        for( Map.Entry<String, Object> attributeEntry : session.getAttributes().entrySet()) {
-            Log("  Session " + attributeEntry.getKey() + " = " + attributeEntry.getValue() );
-        }
-    }
-
-    private String GetStringFromComponents(Intent intent) {
-        Set<String> keys = intent.getSlots().keySet();
-        List<String> sortedKeys = new ArrayList<String>(keys);
-        sortedKeys.sort(new Comparator<String>() {
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
-        });
-
-        StringBuilder responseBuilder = new StringBuilder();
-        for( String key : sortedKeys) {
-            String value = intent.getSlot(key).getValue();
-            if( value != null ) {
-                responseBuilder.append(" " + value);
-            }
-        }
-
-        return responseBuilder.toString();
     }
 
     public void onSessionEnded(SessionEndedRequest request, Session session) throws SpeechletException {
         System.out.println("Edonica Session End : " + request.toString() + ":" + session.toString());
     }
+
+    private void AddStateToMap(StateGeneric state) {
+        States.put(state.getStateID(), state);
+    }
+
+    public StateWelcome stateWelcome = new StateWelcome();
+    public StateNewObj stateNewObj = new StateNewObj();
+    private StateUnknown stateUnknown = new StateUnknown();
+    private Map<String,StateGeneric> States = new HashMap<String,StateGeneric>();
+
 }

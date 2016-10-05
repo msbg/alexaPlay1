@@ -4,6 +4,9 @@
       "intent": "IntentStop"
     },
     {
+      "intent": "IntentNewGame"
+    },
+    {
       "intent": "IntentSetNumber",
       "slots": [
         {
