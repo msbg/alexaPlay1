@@ -12,12 +12,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class AddFirstItem extends AbstractTransition {
     public AddFirstItem() {
-        super(GameState.FirstWhatIsIt, GameState.Welcome, IntentName.IntentFreeText);
+        super(GameState.FirstWhatIsIt, GameState.Welcome);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.getDataNode()==null;
+        return context.isIntent(IntentName.IntentFreeText) && context.getDataNode()==null;
     }
 
     @Override
@@ -38,6 +38,6 @@ public class AddFirstItem extends AbstractTransition {
         System.out.println("Outcome : " + outcome.toString());
 
         //TODO Add the data node here
-        return StateGeneric.makeFullFatResponse("You added " + newItem + " to the game");
+        return StateGeneric.makeFullFatResponse("You added " + newItem + " to the game.  Say New Game to play again");
     }
 }

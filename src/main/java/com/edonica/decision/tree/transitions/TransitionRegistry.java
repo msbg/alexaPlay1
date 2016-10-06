@@ -20,8 +20,9 @@ public class TransitionRegistry {
         register(new IsItFail());
         register(new WhatIsItQuestion());
         register(new WhatIsItQuestionAnswer());
-        register(new WhatIsItQuestionAnswerYes());
-        register(new WhatIsItQuestionAnswerNo());
+        register(new WhatIsItQuestionAnswerYesNo());
+        register(new Question2IsItA());
+        register(new Question2Question());
 
         register(new NewGameWithData());
         register(new AnswerRestart());
@@ -35,14 +36,14 @@ public class TransitionRegistry {
         fromMap.get(abstractTransition.from).add(abstractTransition);
     }
 
-    public AbstractTransition getTransition(GameState from, IntentName intentName, RequestContext context) {
+    public AbstractTransition getTransition(GameState from, RequestContext context) {
         List<AbstractTransition> transitionList = fromMap.get(from);
         for(AbstractTransition abstractTransition:transitionList) {
-            if(abstractTransition.isValidTransition(from, intentName, context)) {
+            if(abstractTransition.isValidTransition(from, context)) {
                 return abstractTransition;
             }
         }
-        return new AbstractTransition(GameState.Welcome, GameState.Welcome, IntentName.IntentStop) {
+        return new AbstractTransition(GameState.Welcome, GameState.Welcome) {
             @Override
             protected boolean isValidTransition(RequestContext context) {
                 return true;

@@ -7,12 +7,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class WhatIsItQuestion extends AbstractTransition {
     public WhatIsItQuestion() {
-        super(GameState.WhatIsIt, GameState.WhatIsItQuestion, IntentName.IntentFreeText);
+        super(GameState.WhatIsIt, GameState.WhatIsItQuestion);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return true;
+        return context.isIntent(IntentName.IntentFreeText);
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
@@ -21,6 +21,6 @@ public class WhatIsItQuestion extends AbstractTransition {
 
         String original = request.getDataNode().getValue();
 
-        return StateGeneric.makeFullFatResponse("What yes/no question would distinguish "+original+" from " +userThoughtOf+ "?");
+        return StateGeneric.makeFullFatResponse("What Yes No question would distinguish "+original+" from " +userThoughtOf+ "?");
     }
 }

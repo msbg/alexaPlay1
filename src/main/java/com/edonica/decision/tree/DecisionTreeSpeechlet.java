@@ -40,7 +40,7 @@ public class DecisionTreeSpeechlet implements Speechlet {
         context.setDataNode(DataNode.fromContext(context));
         IntentName intentName = IntentName.valueOf(context.getIntentName());
         TransitionRegistry transitionRegistry = new TransitionRegistry();
-        AbstractTransition transition = transitionRegistry.getTransition(fromState,intentName, context);
+        AbstractTransition transition = transitionRegistry.getTransition(fromState, context);
         log("Handling request in state " + fromState);
 
         //StateGeneric selectedIntent = states.getOrDefault(stateName, stateWelcome);

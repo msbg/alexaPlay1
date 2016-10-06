@@ -7,12 +7,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class IsItFail extends AbstractTransition {
     public IsItFail() {
-        super(GameState.IsItA, GameState.WhatIsIt, IntentName.IntentNo);
+        super(GameState.IsItA, GameState.WhatIsIt);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return true;
+        return context.isIntent(IntentName.IntentNo);
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {

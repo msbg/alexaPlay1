@@ -7,15 +7,16 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class IsItSuccess extends AbstractTransition {
     public IsItSuccess() {
-        super(GameState.IsItA, GameState.Welcome, IntentName.IntentYes);
+        super(GameState.IsItA, GameState.Welcome);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return true;
+        return context.isIntent(IntentName.IntentYes);
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
+        request.resetState();
         return StateGeneric.makeFullFatResponse("Great!  Say New Game to play again");
     }
 }

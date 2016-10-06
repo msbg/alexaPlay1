@@ -7,12 +7,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class NewGameWithData extends AbstractTransition {
     public NewGameWithData() {
-        super(GameState.Welcome, GameState.Question, IntentName.IntentNewGame);
+        super(GameState.Welcome, GameState.Question);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.getDataNode() != null && context.getDataNode().hasChildren();
+        return context.isIntent(IntentName.IntentNewGame) && context.getDataNode() != null && context.getDataNode().hasChildren();
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {

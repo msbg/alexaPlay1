@@ -7,12 +7,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class AnswerRestart extends AbstractTransition {
     public AnswerRestart() {
-        super(GameState.WhatIsItQuestionAnswer, GameState.Welcome, IntentName.IntentFreeText);
+        super(GameState.WhatIsItQuestionAnswer, GameState.Welcome);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return true;
+        return context.isIntent(IntentName.IntentFreeText);
     }
 
     @Override

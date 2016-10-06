@@ -7,15 +7,15 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class NewGameSingleData extends AbstractTransition {
     public NewGameSingleData() {
-        super(GameState.Welcome, GameState.IsItA, IntentName.IntentNewGame);
+        super(GameState.Welcome, GameState.IsItA);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.getDataNode() !=null && !context.getDataNode().hasChildren();
+        return context.isIntent(IntentName.IntentNewGame) && context.getDataNode() !=null && !context.getDataNode().hasChildren();
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("Is it a " + request.getDataNode().getValue());
+        return StateGeneric.makeFullFatResponse("Is it " + request.getDataNode().getValue());
     }
 }

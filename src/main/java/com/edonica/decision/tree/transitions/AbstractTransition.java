@@ -10,17 +10,14 @@ abstract public class AbstractTransition {
     final GameState from;
     final GameState to;
 
-    final IntentName intentName;
-
-    public AbstractTransition(GameState from, GameState to, IntentName intentName) {
+    public AbstractTransition(GameState from, GameState to) {
         this.from = from;
         this.to = to;
-        this.intentName = intentName;
     }
 
 
-    public boolean isValidTransition(GameState from, IntentName intentName, RequestContext context) {
-        return  from.equals(this.from) && intentName.equals(this.intentName) && isValidTransition(context);
+    public boolean isValidTransition(GameState from, RequestContext context) {
+        return from.equals(this.from) && isValidTransition(context);
     }
 
     abstract protected boolean isValidTransition(RequestContext context);

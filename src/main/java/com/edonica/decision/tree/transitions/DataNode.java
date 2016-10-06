@@ -18,7 +18,6 @@ public class DataNode {
         return yesId != null && noId != null;
     }
 
-
     public void addAlternative( String userQuestion, String userAnimal, boolean answerForUserAnimal)
     {
         //Create our two child nodes
@@ -62,37 +61,6 @@ public class DataNode {
 
         PutItemOutcome outcome = table.putItem(item);
         System.out.println("Outcome of node save : " + outcome.toString());
-    }
-
-    public static DataNode load(String nodeId) {
-        DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
-
-        Table table = dynamoDB.getTable("DecisionTrees");
-
-        Item item = table.getItem("ID", nodeId);
-        if(item == null) {
-            return null;
-        }
-
-        DataNode dn = new DataNode();
-        dn.setId(nodeId);
-        dn.setValue(item.getString("Value"));
-        dn.setQuestion(item.getString("Question"));
-        dn.setYesId(item.getString("YesId"));
-        dn.setNoId(item.getString("NoId"));
-
-        return dn;
-    }
-
-    public static DataNode fromContext(RequestContext context) {
-
-        String explicitNode = context.getSessionString(DataNode.class.getName());
-        if(explicitNode!=null) {
-            return load(explicitNode);
-        }
-
-        //If we don't have a node, just start off with the users UUID
-        return load(context.getUserId());
     }
 
     public String getId() {
@@ -141,5 +109,34 @@ public class DataNode {
     private String yesId;
     private String noId;
 
+    public static DataNode load(String nodeId) {
+        DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
 
+        Table table = dynamoDB.getTable("DecisionTrees");
+
+        Item item = table.getItem("ID", nodeId);
+        if(item == null) {
+            return null;
+        }
+
+        DataNode dn = new DataNode();
+        dn.setId(nodeId);
+        dn.setValue(item.getString("Value"));
+        dn.setQuestion(item.getString("Question"));
+        dn.setYesId(item.getString("YesId"));
+        dn.setNoId(item.getString("NoId"));
+
+        return dn;
+    }
+
+    public static DataNode fromContext(RequestContext context) {
+
+        String explicitNode = context.getSessionString(DataNode.class.getName());
+        if(explicitNode!=null) {
+            return load(explicitNode);
+        }
+
+        //If we don't have a node, just start off with the users UUID
+        return load(context.getUserId());
+    }
 }

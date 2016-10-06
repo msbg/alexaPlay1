@@ -7,12 +7,12 @@ import com.edonica.decision.tree.StateGeneric;
 
 public class GameQuestion2QuestionYes extends AbstractTransition {
     public GameQuestion2QuestionYes() {
-        super(GameState.Question, GameState.Question, IntentName.IntentYes);
+        super(GameState.Question, GameState.Question);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.getDataNode() != null && context.getDataNode().hasChildren();
+        return context.isIntent(IntentName.IntentYes) && context.getDataNode() != null && context.getDataNode().hasChildren();
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
