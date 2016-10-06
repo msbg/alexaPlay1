@@ -1,8 +1,6 @@
 package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
@@ -18,8 +16,8 @@ public class AddFirstItem extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
-        return dn==null;
+    protected boolean isValidTransition(RequestContext context) {
+        return context.getDataNode()==null;
     }
 
     @Override
@@ -30,8 +28,10 @@ public class AddFirstItem extends AbstractTransition {
 
         Table table = dynamoDB.getTable("DecisionTrees");
 
+        String userId = request.getUserId();
+
         Item item = new Item()
-                .withPrimaryKey("ID", 100)
+                .withPrimaryKey("ID", userId)
                 .withString("Value", newItem);
 
         PutItemOutcome outcome = table.putItem(item);

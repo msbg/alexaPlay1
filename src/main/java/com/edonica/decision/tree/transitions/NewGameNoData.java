@@ -11,8 +11,8 @@ public class NewGameNoData extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
-        return dn==null;
+    protected boolean isValidTransition(RequestContext context) {
+        return context.getDataNode()==null;
     }
 
     @Override

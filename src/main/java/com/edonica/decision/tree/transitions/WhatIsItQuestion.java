@@ -11,11 +11,16 @@ public class WhatIsItQuestion extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
+    protected boolean isValidTransition(RequestContext context) {
         return true;
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("What yes/no question would distinguish ?");
+        String userThoughtOf = request.getStringFromComponents();
+        request.setSessionString(WhatIsItQuestion.class.toString(),userThoughtOf );
+
+        String original = request.getDataNode().getValue();
+
+        return StateGeneric.makeFullFatResponse("What yes/no question would distinguish "+original+" from " +userThoughtOf+ "?");
     }
 }

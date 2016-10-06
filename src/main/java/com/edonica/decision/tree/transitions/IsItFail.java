@@ -5,17 +5,17 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
 import com.edonica.decision.tree.StateGeneric;
 
-public class NewGameWithData extends AbstractTransition {
-    public NewGameWithData() {
-        super(GameState.Welcome, GameState.Question, IntentName.IntentNewGame);
+public class IsItFail extends AbstractTransition {
+    public IsItFail() {
+        super(GameState.IsItA, GameState.WhatIsIt, IntentName.IntentNo);
     }
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.getDataNode() != null && context.getDataNode().hasChildren();
+        return true;
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("Question: " + request.getDataNode().getQuestion());
+        return StateGeneric.makeFullFatResponse("What was it?");
     }
 }

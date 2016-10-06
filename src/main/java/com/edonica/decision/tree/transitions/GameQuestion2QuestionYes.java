@@ -5,9 +5,9 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
 import com.edonica.decision.tree.StateGeneric;
 
-public class NewGameWithData extends AbstractTransition {
-    public NewGameWithData() {
-        super(GameState.Welcome, GameState.Question, IntentName.IntentNewGame);
+public class GameQuestion2QuestionYes extends AbstractTransition {
+    public GameQuestion2QuestionYes() {
+        super(GameState.Question, GameState.Question, IntentName.IntentYes);
     }
 
     @Override
@@ -16,6 +16,10 @@ public class NewGameWithData extends AbstractTransition {
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("Question: " + request.getDataNode().getQuestion());
+        String newNodeId = request.getDataNode().getYesId();
+        request.setSessionString(DataNode.class.getName(), newNodeId );
+        DataNode newNode = DataNode.load(newNodeId);
+
+        return StateGeneric.makeFullFatResponse(newNode.getQuestion());
     }
 }

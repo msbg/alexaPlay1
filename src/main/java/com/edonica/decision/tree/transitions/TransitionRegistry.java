@@ -3,14 +3,11 @@ package com.edonica.decision.tree.transitions;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.edonica.decision.tree.transitions.GameState.WhatIsIt;
 
 
 public class TransitionRegistry {
@@ -19,9 +16,12 @@ public class TransitionRegistry {
         register(new AddFirstItem());
 
         register(new NewGameSingleData());
-        register(new WhatIsIt());
+        register(new IsItSuccess());
+        register(new IsItFail());
         register(new WhatIsItQuestion());
         register(new WhatIsItQuestionAnswer());
+        register(new WhatIsItQuestionAnswerYes());
+        register(new WhatIsItQuestionAnswerNo());
 
         register(new NewGameWithData());
         register(new AnswerRestart());
@@ -35,16 +35,16 @@ public class TransitionRegistry {
         fromMap.get(abstractTransition.from).add(abstractTransition);
     }
 
-    public AbstractTransition getTransition(GameState from, IntentName intentName, DataNode dn) {
+    public AbstractTransition getTransition(GameState from, IntentName intentName, RequestContext context) {
         List<AbstractTransition> transitionList = fromMap.get(from);
         for(AbstractTransition abstractTransition:transitionList) {
-            if(abstractTransition.isValidTransition(from, intentName, dn)) {
+            if(abstractTransition.isValidTransition(from, intentName, context)) {
                 return abstractTransition;
             }
         }
         return new AbstractTransition(GameState.Welcome, GameState.Welcome, IntentName.IntentStop) {
             @Override
-            protected boolean isValidTransition(DataNode dn) {
+            protected boolean isValidTransition(RequestContext context) {
                 return true;
             }
 

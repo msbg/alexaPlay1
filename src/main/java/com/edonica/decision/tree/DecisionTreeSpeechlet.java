@@ -33,19 +33,19 @@ public class DecisionTreeSpeechlet implements Speechlet {
 
     public SpeechletResponse onIntent(IntentRequest intentRequest, Session session) throws SpeechletException {
 
-        RequestContext request = new RequestContext(this, intentRequest, session);
-        request.DumpRequest();
-        GameState fromState = GameState.valueOf(request.getSessionString(GameState.class.getName()));
-        DataNode dn = null;
-        request.setDataNode(dn);
-        IntentName intentName = IntentName.valueOf(request.getIntentName());
+        RequestContext context = new RequestContext(this, intentRequest, session);
+        context.DumpRequest();
+        GameState fromState = GameState.valueOf(context.getSessionString(GameState.class.getName()));
+
+        context.setDataNode(DataNode.fromContext(context));
+        IntentName intentName = IntentName.valueOf(context.getIntentName());
         TransitionRegistry transitionRegistry = new TransitionRegistry();
-        AbstractTransition transition = transitionRegistry.getTransition(fromState,intentName, dn);
+        AbstractTransition transition = transitionRegistry.getTransition(fromState,intentName, context);
         log("Handling request in state " + fromState);
 
         //StateGeneric selectedIntent = states.getOrDefault(stateName, stateWelcome);
 
-        return transition.handleRequest(request);
+        return transition.handleRequest(context);
 
     }
 

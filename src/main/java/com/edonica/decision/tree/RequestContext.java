@@ -75,7 +75,10 @@ public class RequestContext {
         for( String key : sortedKeys) {
             String value = intent.getSlot(key).getValue();
             if( value != null ) {
-                responseBuilder.append(" " + value);
+                if( responseBuilder.length() > 0 ) {
+                    responseBuilder.append(" ");
+                }
+                responseBuilder.append(value);
             }
         }
 
@@ -99,5 +102,9 @@ public class RequestContext {
 
     public void setDataNode(DataNode dataNode) {
         this.dataNode = dataNode;
+    }
+
+    public String getUserId() {
+        return session.getUser().getUserId();
     }
 }

@@ -11,13 +11,19 @@ public class WhatIsItQuestionAnswer extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
+    protected boolean isValidTransition(RequestContext context) {
         return true;
     }
 
 
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("And the answer for x would be?");
+
+        String userQuestion = request.getStringFromComponents();
+        request.setSessionString(WhatIsItQuestionAnswer.class.toString(),userQuestion );
+
+        String userAnimal = request.getSessionString(WhatIsItQuestion.class.toString());
+
+        return StateGeneric.makeFullFatResponse("And the answer for "+userAnimal+" would be?");
     }
 }

@@ -11,7 +11,7 @@ public class AnswerRestart extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
+    protected boolean isValidTransition(RequestContext context) {
         return true;
     }
 

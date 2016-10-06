@@ -11,11 +11,11 @@ public class NewGameSingleData extends AbstractTransition {
     }
 
     @Override
-    protected boolean isValidTransition(DataNode dn) {
-        return dn!=null && !dn.hasChildren();
+    protected boolean isValidTransition(RequestContext context) {
+        return context.getDataNode() !=null && !context.getDataNode().hasChildren();
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("Is it a " + request.getDataNode().value());
+        return StateGeneric.makeFullFatResponse("Is it a " + request.getDataNode().getValue());
     }
 }

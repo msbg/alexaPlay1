@@ -19,11 +19,11 @@ abstract public class AbstractTransition {
     }
 
 
-    public boolean isValidTransition(GameState from, IntentName intentName, DataNode dn) {
-        return  from.equals(this.from) && intentName.equals(this.intentName) && isValidTransition(dn);
+    public boolean isValidTransition(GameState from, IntentName intentName, RequestContext context) {
+        return  from.equals(this.from) && intentName.equals(this.intentName) && isValidTransition(context);
     }
 
-    abstract protected boolean isValidTransition(DataNode dn);
+    abstract protected boolean isValidTransition(RequestContext context);
 
     public SpeechletResponse handleRequest(RequestContext request) {
         SpeechletResponse response = internalHandleRequest(request);
