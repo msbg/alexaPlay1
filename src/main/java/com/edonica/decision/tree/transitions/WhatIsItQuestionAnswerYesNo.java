@@ -28,6 +28,6 @@ public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
         context.resetState();
 
         String stringYesNo = (answerForUserAnimal?"Yes":"No");
-        return SpeechHelpers.makeFullFatResponse("So "+stringYesNo +" for " + userAnimal + " when asked " + userQuestion + ".  I'll remember that.  Say New Game to start again");
+        return SpeechHelpers.makeFullFatResponse("So "+stringYesNo +" for " + userAnimal + " when asked: " + userQuestion + ".  I'll remember that.  Say New Game to start again");
     }
 }

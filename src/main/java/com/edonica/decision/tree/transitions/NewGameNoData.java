@@ -18,6 +18,6 @@ public class NewGameNoData extends AbstractTransition {
 
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return SpeechHelpers.makeFullFatResponse("OK.  My mind is blank and I need to learn things.  Please think of an object and tell me what it is.");
+        return SpeechHelpers.makeFullFatResponse("OK.  My mind is blank and I need to learn things.  Please think of an object and tell me what it is.  Using more than one word to describe it will help my voice recognition.");
     }
 }

@@ -18,6 +18,6 @@ public class NewGameWithData extends AbstractTransition {
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return SpeechHelpers.makeFullFatResponse("Please think of an object and answer this question: " + request.getDataNode().getQuestion());
+        return SpeechHelpers.makeFullFatResponse("Please think of an object and answer this question: " + request.getDataNode().getQuestion() + "?");
     }
 }

@@ -24,6 +24,6 @@ public class Question2Question extends AbstractTransition {
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
         DataNode targetChild = context.getChildNodeFromYesNoIntent();
         context.setSessionString(DataNode.class.getName(), targetChild.getId() );
-        return SpeechHelpers.makeFullFatResponse(targetChild.getQuestion());
+        return SpeechHelpers.makeFullFatResponse(targetChild.getQuestion() + "?");
     }
 }

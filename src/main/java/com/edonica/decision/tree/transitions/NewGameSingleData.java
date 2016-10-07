@@ -18,6 +18,6 @@ public class NewGameSingleData extends AbstractTransition {
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return SpeechHelpers.makeFullFatResponse("OK.  I only know about one thing right now.  Is it " + request.getDataNode().getValue());
+        return SpeechHelpers.makeFullFatResponse("OK.  Please think of an object.  Thank you.  Now I only know about one thing right now.  Is it " + request.getDataNode().getValue() + "?");
     }
 }
