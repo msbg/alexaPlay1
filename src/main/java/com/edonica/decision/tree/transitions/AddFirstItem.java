@@ -1,14 +1,8 @@
 package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
-
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class AddFirstItem extends AbstractTransition {
     public AddFirstItem() {
@@ -17,27 +11,23 @@ public class AddFirstItem extends AbstractTransition {
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.isIntent(IntentName.IntentFreeText) && context.getDataNode()==null;
+        return context.isIntent(IntentName.IntentFreeText)
+                && context.getDataNode()==null;
     }
 
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
         String newItem = request.getStringFromComponents();
 
-        DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
+        //TODO - confirm text for first added item
 
-        Table table = dynamoDB.getTable("DecisionTrees");
+        DataNode dn = new DataNode();
 
-        String userId = request.getUserId();
+        //First node is stored against the user ID rather than a GUID
+        dn.setId(request.getUserId());
+        dn.setValue(newItem);
+        dn.save();
 
-        Item item = new Item()
-                .withPrimaryKey("ID", userId)
-                .withString("Value", newItem);
-
-        PutItemOutcome outcome = table.putItem(item);
-        System.out.println("Outcome : " + outcome.toString());
-
-        //TODO Add the data node here
-        return StateGeneric.makeFullFatResponse("You added " + newItem + " to the game.  Say New Game to play again");
+        return SpeechHelpers.makeFullFatResponse("You added " + newItem + ", your first object in this game.  Say New Game to play again");
     }
 }

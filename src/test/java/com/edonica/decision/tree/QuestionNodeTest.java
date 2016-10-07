@@ -2,23 +2,20 @@ package com.edonica.decision.tree;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by edward on 05/10/2016.
- */
 public class QuestionNodeTest {
     @org.junit.Before
     public void setUp() throws Exception {
-
+        //Test setup
     }
 
     @org.junit.Test
     public void test1() {
-
+        //Do some tests!
     }
 
     @org.junit.After
     public void tearDown() throws Exception {
-
+        //Test teardown
     }
 
 }

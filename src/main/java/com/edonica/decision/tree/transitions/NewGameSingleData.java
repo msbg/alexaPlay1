@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class NewGameSingleData extends AbstractTransition {
     public NewGameSingleData() {
@@ -12,10 +12,12 @@ public class NewGameSingleData extends AbstractTransition {
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.isIntent(IntentName.IntentNewGame) && context.getDataNode() !=null && !context.getDataNode().hasChildren();
+        return context.isIntent(IntentName.IntentNewGame)
+                && context.getDataNode() !=null
+                && !context.getDataNode().hasChildren();
     }
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("Is it " + request.getDataNode().getValue());
+        return SpeechHelpers.makeFullFatResponse("OK.  I only know about one thing right now.  Is it " + request.getDataNode().getValue());
     }
 }

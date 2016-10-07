@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
     public WhatIsItQuestionAnswerYesNo() {
@@ -20,13 +20,14 @@ public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
         String userAnimal = context.getSessionString(WhatIsItQuestion.class.toString());
         String userQuestion = context.getSessionString(WhatIsItQuestionAnswer.class.toString());
-
         boolean answerForUserAnimal = context.isIntent(IntentName.IntentYes);
 
-        context.getDataNode().addAlternative( userQuestion, userAnimal, answerForUserAnimal );
+        //TODO - handle some kind of cancellation during yes/no
 
+        context.getDataNode().addAlternative( userQuestion, userAnimal, answerForUserAnimal );
         context.resetState();
 
-        return StateGeneric.makeFullFatResponse("So "+(answerForUserAnimal?"Yes":"No") +" for " + userAnimal + " when asked " + userQuestion + ".  Say New Game to start again");
+        String stringYesNo = (answerForUserAnimal?"Yes":"No");
+        return SpeechHelpers.makeFullFatResponse("So "+stringYesNo +" for " + userAnimal + " when asked " + userQuestion + ".  I'll remember that.  Say New Game to start again");
     }
 }

@@ -1,8 +1,5 @@
 package com.edonica.monica.lambdatest1;
 
-/**
- * Created by me on 02/10/2016.
- */
 public class Response {
     String greetings;
 

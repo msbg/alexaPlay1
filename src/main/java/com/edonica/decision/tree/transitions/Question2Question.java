@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class Question2Question extends AbstractTransition {
     public Question2Question() {
@@ -16,17 +16,14 @@ public class Question2Question extends AbstractTransition {
             return false;
 
         DataNode targetChild = context.getChildNodeFromYesNoIntent();
-        return targetChild != null && targetChild.hasChildren();
+        return targetChild != null
+                && targetChild.hasChildren();
     }
 
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
         DataNode targetChild = context.getChildNodeFromYesNoIntent();
-
         context.setSessionString(DataNode.class.getName(), targetChild.getId() );
-
-        SpeechletResponse response = StateGeneric.makeFullFatResponse(targetChild.getQuestion());
-
-        return response;
+        return SpeechHelpers.makeFullFatResponse(targetChild.getQuestion());
     }
 }

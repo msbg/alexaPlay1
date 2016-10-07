@@ -25,10 +25,9 @@ public class TransitionRegistry {
         register(new Question2Question());
 
         register(new NewGameWithData());
-        register(new AnswerRestart());
     }
 
-    Map<GameState, List<AbstractTransition>> fromMap = new HashMap<>();
+    final Map<GameState, List<AbstractTransition>> fromMap = new HashMap<>();
     private void register(AbstractTransition abstractTransition) {
         if(!fromMap.containsKey(abstractTransition.from)) {
             fromMap.put(abstractTransition.from, new ArrayList<>());
@@ -55,7 +54,7 @@ public class TransitionRegistry {
                 if( request.getIntentName().equals( IntentName.IntentStop.toString())) {
                     speech.setText("Byeeee.  See ya!");
                 } else {
-                    speech.setText("Couldn't determine transition... bouncing back to the start... BOING!");
+                    speech.setText("Hmm, I don't understand " +request.getIntentName()+ ".  This tends to happen when you say short words.  Bouncing out of app to be safe.  BOING!");
                 }
                 return SpeechletResponse.newTellResponse(speech);
             }

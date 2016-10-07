@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class IsItFail extends AbstractTransition {
     public IsItFail() {
@@ -14,8 +14,9 @@ public class IsItFail extends AbstractTransition {
     protected boolean isValidTransition(RequestContext context) {
         return context.isIntent(IntentName.IntentNo);
     }
+
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-        return StateGeneric.makeFullFatResponse("What was it?");
+        return SpeechHelpers.makeFullFatResponse("What was it?  Add an, or a, to help me understand.");
     }
 }

@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class WhatIsItQuestion extends AbstractTransition {
     public WhatIsItQuestion() {
@@ -14,13 +14,15 @@ public class WhatIsItQuestion extends AbstractTransition {
     protected boolean isValidTransition(RequestContext context) {
         return context.isIntent(IntentName.IntentFreeText);
     }
+
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
         String userThoughtOf = request.getStringFromComponents();
         request.setSessionString(WhatIsItQuestion.class.toString(),userThoughtOf );
 
-        String original = request.getDataNode().getValue();
+        //TODO - confirm user object text
 
-        return StateGeneric.makeFullFatResponse("What Yes No question would distinguish "+original+" from " +userThoughtOf+ "?");
+        String original = request.getDataNode().getValue();
+        return SpeechHelpers.makeFullFatResponse("What Yes No question would distinguish "+original+" from " +userThoughtOf+ "?");
     }
 }

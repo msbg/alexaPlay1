@@ -3,7 +3,7 @@ package com.edonica.decision.tree.transitions;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.StateGeneric;
+import com.edonica.decision.tree.SpeechHelpers;
 
 public class WhatIsItQuestionAnswer extends AbstractTransition {
     public WhatIsItQuestionAnswer() {
@@ -15,15 +15,14 @@ public class WhatIsItQuestionAnswer extends AbstractTransition {
         return context.isIntent(IntentName.IntentFreeText);
     }
 
-
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext request) {
-
         String userQuestion = request.getStringFromComponents();
         request.setSessionString(WhatIsItQuestionAnswer.class.toString(),userQuestion );
 
-        String userAnimal = request.getSessionString(WhatIsItQuestion.class.toString());
+        //TODO - confirm user question
 
-        return StateGeneric.makeFullFatResponse("And the answer for "+userAnimal+" would be?");
+        String userAnimal = request.getSessionString(WhatIsItQuestion.class.toString());
+        return SpeechHelpers.makeFullFatResponse("You asked: " + userQuestion + ".  And the answer for "+userAnimal+" would be?");
     }
 }

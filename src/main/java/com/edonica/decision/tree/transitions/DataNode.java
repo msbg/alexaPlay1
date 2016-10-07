@@ -9,14 +9,18 @@ import com.edonica.decision.tree.RequestContext;
 
 import java.util.UUID;
 
-/**
- * Created by me on 05/10/2016.
- */
 public class DataNode {
     public boolean hasChildren()
     {
         return yesId != null && noId != null;
     }
+
+    private static final String DYNAMO_TABLE_DECISIONS = "DecisionTrees";
+    private static final String DYNAMO_FIELD_ID = "ID";
+    private static final String DYNAMO_FIELD_VALUE = "Value";
+    private static final String DYNAMO_FIELD_QUESTION = "Question";
+    private static final String DYNAMO_FIELD_YES_ID = "YesId";
+    private static final String DYNAMO_FIELD_NO_ID = "NoId";
 
     public void addAlternative( String userQuestion, String userAnimal, boolean answerForUserAnimal)
     {
@@ -41,22 +45,22 @@ public class DataNode {
     void save() {
         DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
 
-        Table table = dynamoDB.getTable("DecisionTrees");
+        Table table = dynamoDB.getTable(DYNAMO_TABLE_DECISIONS);
 
         Item item = new Item()
-                .withPrimaryKey("ID", id);
+                .withPrimaryKey(DYNAMO_FIELD_ID, id);
 
         if( value != null) {
-            item.withString("Value", value);
+            item.withString(DYNAMO_FIELD_VALUE, value);
         }
         if( question != null) {
-            item.withString("Question", question);
+            item.withString(DYNAMO_FIELD_QUESTION, question);
         }
         if( yesId != null) {
-            item.withString("YesId", yesId);
+            item.withString(DYNAMO_FIELD_YES_ID, yesId);
         }
         if( noId != null) {
-            item.withString("NoId", noId);
+            item.withString(DYNAMO_FIELD_NO_ID, noId);
         }
 
         PutItemOutcome outcome = table.putItem(item);
@@ -112,19 +116,19 @@ public class DataNode {
     public static DataNode load(String nodeId) {
         DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
 
-        Table table = dynamoDB.getTable("DecisionTrees");
+        Table table = dynamoDB.getTable(DYNAMO_TABLE_DECISIONS);
 
-        Item item = table.getItem("ID", nodeId);
+        Item item = table.getItem(DYNAMO_FIELD_ID, nodeId);
         if(item == null) {
             return null;
         }
 
         DataNode dn = new DataNode();
         dn.setId(nodeId);
-        dn.setValue(item.getString("Value"));
-        dn.setQuestion(item.getString("Question"));
-        dn.setYesId(item.getString("YesId"));
-        dn.setNoId(item.getString("NoId"));
+        dn.setValue(item.getString(DYNAMO_FIELD_VALUE));
+        dn.setQuestion(item.getString(DYNAMO_FIELD_QUESTION));
+        dn.setYesId(item.getString(DYNAMO_FIELD_YES_ID));
+        dn.setNoId(item.getString(DYNAMO_FIELD_NO_ID));
 
         return dn;
     }
@@ -136,7 +140,7 @@ public class DataNode {
             return load(explicitNode);
         }
 
-        //If we don't have a node, just start off with the users UUID
+        //If we don't have a node set, start off with the users UUID
         return load(context.getUserId());
     }
 }
