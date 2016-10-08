@@ -60,4 +60,8 @@ public class TransitionRegistry {
             }
         };
     }
+
+    public Map<GameState, List<AbstractTransition>> getFromMap() {
+        return fromMap;
+    }
 }
