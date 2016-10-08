@@ -1,0 +1,14 @@
+IntentNewGame new game
+IntentGetNumber get number
+IntentSetNumber set to {number}
+IntentSetNumber set {number}
+IntentFreeText {ta}
+IntentFreeText {ta} {tb}
+IntentFreeText {ta} {tb} {tc}
+IntentFreeText {ta} {tb} {tc} {td}
+IntentFreeText {ta} {tb} {tc} {td} {te}
+IntentFreeText {ta} {tb} {tc} {td} {te} {tf}
+IntentFreeText {ta} {tb} {tc} {td} {te} {tf} {tg}
+IntentFreeText {ta} {tb} {tc} {td} {te} {tf} {tg} {th}
+IntentFreeText {ta} {tb} {tc} {td} {te} {tf} {tg} {th} {ti}
+IntentFreeText {ta} {tb} {tc} {td} {te} {tf} {tg} {th} {ti} {tj}

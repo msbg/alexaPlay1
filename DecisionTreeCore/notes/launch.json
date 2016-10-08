@@ -1,0 +1,58 @@
+{
+  "session": {
+    "sessionId": "SessionId.44f03498-46aa-4b63-a407-37d46aad0ccc",
+    "application": {
+      "applicationId": "amzn1.ask.skill.1743b9db-02f5-424b-ae86-746ad7bdde6a"
+    },
+    "attributes": {
+      "com.edonica.decision.tree.transitions.GameState": "FirstWhatIsIt"
+    },
+    "user": {
+      "userId": "amzn1.ask.account.AHJXRHXCP5HE3YYO6WVAMWV7Q2LI7CSUYOS633P7PU623S6HNGU7B4BSMRP3YBROPFQ55S6LA5L5YJRFZMLXDYE74VXBDCB66F54IB7DAZLLRV2DCD7VTXXCRIZDWYPUIA7CLNJC7PJA5PMB54UMSECLMVVACRAMBDQ6T4R6THVYZR6TF3T6KRDQEOEE22GMZVCZ4L3HPZLK6SQ"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.a1c92f41-bab3-416f-b5da-23a865434766",
+    "locale": "en-GB",
+    "timestamp": "2016-10-06T11:43:22Z",
+    "intent": {
+      "name": "IntentFreeText",
+      "slots": {
+        "td": {
+          "name": "td"
+        },
+        "te": {
+          "name": "te"
+        },
+        "tf": {
+          "name": "tf"
+        },
+        "tg": {
+          "name": "tg"
+        },
+        "th": {
+          "name": "th"
+        },
+        "ti": {
+          "name": "ti"
+        },
+        "tj": {
+          "name": "tj"
+        },
+        "ta": {
+          "name": "ta",
+          "value": "dog"
+        },
+        "tb": {
+          "name": "tb"
+        },
+        "tc": {
+          "name": "tc"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
