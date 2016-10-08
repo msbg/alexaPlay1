@@ -2,8 +2,7 @@ package com.edonica.decision.tree.transitions;
 
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.SpeechHelpers;
+import com.edonica.decision.tree.model.*;
 
 public class NewGameSingleData extends AbstractTransition {
     public NewGameSingleData() {

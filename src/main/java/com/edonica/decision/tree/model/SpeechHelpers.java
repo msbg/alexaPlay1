@@ -1,4 +1,4 @@
-package com.edonica.decision.tree;
+package com.edonica.decision.tree.model;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;

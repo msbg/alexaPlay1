@@ -1,13 +1,12 @@
-package com.edonica.decision.tree;
+package com.edonica.decision.tree.model;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.Session;
-import com.edonica.decision.tree.transitions.DataNode;
-import com.edonica.decision.tree.transitions.IntentName;
-import com.edonica.decision.tree.transitions.WhatIsItQuestion;
-import com.edonica.decision.tree.transitions.WhatIsItQuestionAnswer;
+import com.edonica.decision.tree.DecisionTreeSpeechlet;
+import com.edonica.decision.tree.transitions.WhatIsIt;
+import com.edonica.decision.tree.transitions.WhatQuestion;
 
 import java.util.*;
 
@@ -41,13 +40,13 @@ public class RequestContext {
         }
     }
 
-    public String getSessionString(String key) {
-        Object value = session.getAttribute(key);
+    public String getSessionString(SessionKey key) {
+        Object value = session.getAttribute(key.toString());
         return value == null ? null : value.toString();
     }
 
-    public void setSessionString(String key, String value) {
-        session.setAttribute(key,value);
+    public void setSessionString(SessionKey key, String value) {
+        session.setAttribute(key.toString(),value);
     }
 
     public String getSlot(String key) {
@@ -118,8 +117,9 @@ public class RequestContext {
 
     public void resetState() {
         //This could be more generic!
-        session.removeAttribute(DataNode.class.getName());
-        session.removeAttribute(WhatIsItQuestion.class.getName());
-        session.removeAttribute(WhatIsItQuestionAnswer.class.getName());
+        session.removeAttribute(SessionKey.GameState.toString());
+        session.removeAttribute(SessionKey.DataNode.toString());
+        session.removeAttribute(SessionKey.ObjectName.toString());
+        session.removeAttribute(SessionKey.UserQuestion.toString());
     }
 }

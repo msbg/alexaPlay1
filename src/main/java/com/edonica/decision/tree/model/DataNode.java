@@ -1,11 +1,10 @@
-package com.edonica.decision.tree.transitions;
+package com.edonica.decision.tree.model;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.edonica.decision.tree.RequestContext;
 
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public class DataNode {
         this.save();
     }
 
-    void save() {
+    public void save() {
         DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
 
         Table table = dynamoDB.getTable(DYNAMO_TABLE_DECISIONS);
@@ -135,7 +134,7 @@ public class DataNode {
 
     public static DataNode fromContext(RequestContext context) {
 
-        String explicitNode = context.getSessionString(DataNode.class.getName());
+        String explicitNode = context.getSessionString(SessionKey.DataNode);
         if(explicitNode!=null) {
             return load(explicitNode);
         }

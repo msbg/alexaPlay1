@@ -1,7 +1,9 @@
-package com.edonica.decision.tree.transitions;
+package com.edonica.decision.tree.model;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.edonica.decision.tree.RequestContext;
+import com.edonica.decision.tree.model.GameState;
+import com.edonica.decision.tree.model.RequestContext;
+import com.edonica.decision.tree.model.SessionKey;
 
 abstract public class AbstractTransition {
     final GameState from;
@@ -12,17 +14,26 @@ abstract public class AbstractTransition {
         this.to = to;
     }
 
+    abstract protected boolean isValidTransition(RequestContext context);
+
+    protected abstract SpeechletResponse internalHandleRequest(RequestContext request);
+
+    public GameState getFrom() {
+        return from;
+    }
+
+    public GameState getTo() {
+        return to;
+    }
+
     public boolean isValidTransition(GameState from, RequestContext context) {
         return from.equals(this.from) && isValidTransition(context);
     }
 
-    abstract protected boolean isValidTransition(RequestContext context);
-
     public SpeechletResponse handleRequest(RequestContext request) {
         SpeechletResponse response = internalHandleRequest(request);
-        request.setSessionString(GameState.class.getName(), to.toString());
+        request.setSessionString(SessionKey.GameState, to.toString());
         return response;
     }
 
-    protected abstract SpeechletResponse internalHandleRequest(RequestContext request);
 }

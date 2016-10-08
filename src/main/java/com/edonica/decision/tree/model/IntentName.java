@@ -1,4 +1,4 @@
-package com.edonica.decision.tree.transitions;
+package com.edonica.decision.tree.model;
 
 
 public enum IntentName {

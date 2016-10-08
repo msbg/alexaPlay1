@@ -1,7 +1,7 @@
 package com.edonica.decision.tree;
 
 import com.amazon.speech.speechlet.*;
-import com.edonica.decision.tree.transitions.*;
+import com.edonica.decision.tree.model.*;
 
 public class DecisionTreeSpeechlet implements Speechlet {
 
@@ -15,7 +15,7 @@ public class DecisionTreeSpeechlet implements Speechlet {
 
     public void onSessionStarted(SessionStartedRequest intentRequest, Session session) throws SpeechletException {
         log("Session Start User:" + session.getUser().getUserId() + " Session:" + session.getSessionId());
-        session.setAttribute(GameState.class.getName(), GameState.Welcome.toString());
+        session.setAttribute(SessionKey.GameState.toString(), GameState.Welcome.toString());
     }
 
     public SpeechletResponse onLaunch(LaunchRequest intentRequest, Session session) throws SpeechletException {
@@ -30,7 +30,7 @@ public class DecisionTreeSpeechlet implements Speechlet {
         context.setDataNode(DataNode.fromContext(context));
 
         context.DumpRequest();
-        GameState fromState = GameState.valueOf(context.getSessionString(GameState.class.getName()));
+        GameState fromState = GameState.valueOf(context.getSessionString(SessionKey.GameState));
         TransitionRegistry transitionRegistry = new TransitionRegistry();
         AbstractTransition transition = transitionRegistry.getTransition(fromState, context);
         log("Handling request in state " + fromState);

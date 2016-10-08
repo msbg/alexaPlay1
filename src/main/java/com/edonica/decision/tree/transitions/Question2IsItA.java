@@ -2,8 +2,7 @@ package com.edonica.decision.tree.transitions;
 
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.SpeechHelpers;
+import com.edonica.decision.tree.model.*;
 
 public class Question2IsItA extends AbstractTransition {
     public Question2IsItA() {
@@ -23,7 +22,7 @@ public class Question2IsItA extends AbstractTransition {
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
         DataNode targetChild = context.getChildNodeFromYesNoIntent();
-        context.setSessionString(DataNode.class.getName(), targetChild.getId() );
+        context.setSessionString(SessionKey.DataNode, targetChild.getId() );
         return SpeechHelpers.makeFullFatResponse("Is it " + targetChild.getValue() + "?");
     }
 }

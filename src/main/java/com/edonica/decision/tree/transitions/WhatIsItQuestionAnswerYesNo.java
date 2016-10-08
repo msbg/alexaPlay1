@@ -2,8 +2,7 @@ package com.edonica.decision.tree.transitions;
 
 
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.edonica.decision.tree.RequestContext;
-import com.edonica.decision.tree.SpeechHelpers;
+import com.edonica.decision.tree.model.*;
 
 public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
     public WhatIsItQuestionAnswerYesNo() {
@@ -18,11 +17,9 @@ public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
 
     @Override
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
-        String userAnimal = context.getSessionString(WhatIsItQuestion.class.toString());
-        String userQuestion = context.getSessionString(WhatIsItQuestionAnswer.class.toString());
+        String userAnimal = context.getSessionString(SessionKey.ObjectName);
+        String userQuestion = context.getSessionString(SessionKey.UserQuestion);
         boolean answerForUserAnimal = context.isIntent(IntentName.IntentYes);
-
-        //TODO - handle some kind of cancellation during yes/no
 
         context.getDataNode().addAlternative( userQuestion, userAnimal, answerForUserAnimal );
         context.resetState();
