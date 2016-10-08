@@ -12,7 +12,7 @@ Deploy our JAR file:
 ```
 aws --profile edonica --region us-east-1 lambda update-function-code \
   --function-name AlexaDecisionTreeSpeechlet \
-  --zip-file fileb://../target/lambdaTest1-1.0-SNAPSHOT.jar
+  --zip-file fileb://../target/DecisionTreeCore-1.0-SNAPSHOT.jar
 ```
 
 Invoke JAR given input JSON:
@@ -30,4 +30,6 @@ Pretty print output:
 `jq . output.json`
 
 
+Generate graph from .dot file:
+`dot DecisionTree.dot -Tpng  -ofile -O`
 

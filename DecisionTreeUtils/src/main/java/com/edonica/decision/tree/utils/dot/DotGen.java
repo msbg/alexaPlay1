@@ -25,7 +25,13 @@ public class DotGen {
         buff.append("digraph {\n");
         for(Map.Entry<GameState, List<AbstractTransition>> kv:transitionRegistry.getFromMap().entrySet()) {
             for(AbstractTransition abstractTransition : kv.getValue()) {
-                buff.append( abstractTransition.getFrom().toString() + "->" + abstractTransition.getTo() + "\n");
+                buff.append(
+                        abstractTransition.getFrom().toString() +
+                                "->" +
+                                abstractTransition.getTo() +
+                                "[label=\"" +
+                                abstractTransition.getClass().getSimpleName() +
+                                "\"]\n");
             }
         }
         buff.append("}");
