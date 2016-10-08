@@ -5,8 +5,6 @@ import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.Session;
 import com.edonica.decision.tree.DecisionTreeSpeechlet;
-import com.edonica.decision.tree.transitions.WhatIsIt;
-import com.edonica.decision.tree.transitions.WhatQuestion;
 
 import java.util.*;
 
@@ -66,7 +64,7 @@ public class RequestContext {
 
         Set<String> keys = intent.getSlots().keySet();
         List<String> sortedKeys = new ArrayList<>(keys);
-        sortedKeys.sort((o1, o2) -> o1.compareTo(o2));
+        sortedKeys.sort(String::compareTo);
 
         StringBuilder responseBuilder = new StringBuilder();
         for( String key : sortedKeys) {

@@ -2,7 +2,6 @@ package com.edonica.decision.tree.model;
 
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
-import com.edonica.decision.tree.transitions.*;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 

@@ -1,7 +1,5 @@
 package com.edonica.decision.tree;
 
-import static org.junit.Assert.*;
-
 public class QuestionNodeTest {
     @org.junit.Before
     public void setUp() throws Exception {
