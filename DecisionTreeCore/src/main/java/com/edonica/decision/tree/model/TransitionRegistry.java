@@ -34,7 +34,9 @@ public class TransitionRegistry {
     }
 
     public AbstractTransition getTransition(GameState from, RequestContext context) {
+
         List<AbstractTransition> transitionList = fromMap.get(from);
+
         if( transitionList != null ) {
             for (AbstractTransition abstractTransition : transitionList) {
                 if (abstractTransition.isValidTransition(from, context)) {
@@ -54,8 +56,10 @@ public class TransitionRegistry {
                     PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
                     speech.setText("Byeeee.  See ya!");
                     return SpeechletResponse.newTellResponse(speech);
+                } else if( request.isIntent(IntentName.AMAZON_HelpIntent)) {
+                    return SpeechHelpers.makeFullFatResponse(StateHelp.getHelpText(from));
                 } else {
-                    return SpeechHelpers.makeFullFatResponse("Sorry, I don't know what to do with " + request.getIntentName() + " at "+from.toString()+".");
+                    return SpeechHelpers.makeFullFatResponse(StateHelp.getFailText(from));
                 }
             }
         };
