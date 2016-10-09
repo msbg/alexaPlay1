@@ -11,7 +11,7 @@ public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.isIntent(IntentName.IntentYes) || context.isIntent(IntentName.IntentNo);
+        return context.isIntent(IntentName.AMAZON_YesIntent) || context.isIntent(IntentName.AMAZON_NoIntent);
     }
 
 
@@ -19,7 +19,7 @@ public class WhatIsItQuestionAnswerYesNo extends AbstractTransition {
     protected SpeechletResponse internalHandleRequest(RequestContext context) {
         String userAnimal = context.getSessionString(SessionKey.ObjectName);
         String userQuestion = context.getSessionString(SessionKey.UserQuestion);
-        boolean answerForUserAnimal = context.isIntent(IntentName.IntentYes);
+        boolean answerForUserAnimal = context.isIntent(IntentName.AMAZON_YesIntent);
 
         context.getDataNode().addAlternative( userQuestion, userAnimal, answerForUserAnimal );
         context.resetState();

@@ -11,7 +11,7 @@ public class IsItFail extends AbstractTransition {
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.isIntent(IntentName.IntentNo);
+        return context.isIntent(IntentName.AMAZON_NoIntent);
     }
 
     @Override

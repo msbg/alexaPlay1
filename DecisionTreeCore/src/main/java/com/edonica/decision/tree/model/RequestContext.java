@@ -20,7 +20,9 @@ public class RequestContext {
     }
 
     public String getIntentName() {
-        return request.getIntent().getName();
+        String name = request.getIntent().getName();
+        //Substitute '.' for '_' to make it easier to use an enum
+        return name.replace('.','_');
     }
 
     public void DumpRequest() {
@@ -94,9 +96,9 @@ public class RequestContext {
 
     public DataNode getChildNodeFromYesNoIntent() {
         String childId;
-        if( isIntent(IntentName.IntentYes)) {
+        if( isIntent(IntentName.AMAZON_YesIntent)) {
             childId = getDataNode().getYesId();
-        } else if( isIntent(IntentName.IntentNo)) {
+        } else if( isIntent(IntentName.AMAZON_NoIntent)) {
             childId = getDataNode().getNoId();
         } else {
             return null;

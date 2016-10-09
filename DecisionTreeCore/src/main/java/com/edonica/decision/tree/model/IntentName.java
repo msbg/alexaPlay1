@@ -1,10 +1,11 @@
 package com.edonica.decision.tree.model;
 
-
 public enum IntentName {
     IntentNewGame,
-    IntentStop,
     IntentFreeText,
-    IntentYes,
-    IntentNo
+    AMAZON_YesIntent,
+    AMAZON_NoIntent,
+    AMAZON_HelpIntent,
+    AMAZON_StopIntent
+
 }

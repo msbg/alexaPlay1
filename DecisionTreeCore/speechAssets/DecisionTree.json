@@ -4,18 +4,6 @@
       "intent": "IntentNewGame"
     },
     {
-      "intent": "IntentSetNumber",
-      "slots": [
-        {
-          "name": "number",
-          "type": "AMAZON.NUMBER"
-        }
-      ]
-    },
-    {
-      "intent": "IntentGetNumber"
-    },
-    {
       "intent": "IntentFreeText",
       "slots": [
         {
@@ -61,7 +49,16 @@
       ]
     },
     {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
       "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
     }
   ]
 }

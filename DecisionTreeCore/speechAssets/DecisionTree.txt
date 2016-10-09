@@ -1,7 +1,4 @@
 IntentNewGame new game
-IntentGetNumber get number
-IntentSetNumber set to {number}
-IntentSetNumber set {number}
 IntentFreeText {ta}
 IntentFreeText {ta} {tb}
 IntentFreeText {ta} {tb} {tc}

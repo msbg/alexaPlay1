@@ -50,7 +50,7 @@ public class TransitionRegistry {
 
             @Override
             protected SpeechletResponse internalHandleRequest(RequestContext request) {
-                if( request.getIntentName().equals( IntentName.IntentStop.toString())) {
+                if( request.isIntent(IntentName.AMAZON_StopIntent)) {
                     PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
                     speech.setText("Byeeee.  See ya!");
                     return SpeechletResponse.newTellResponse(speech);

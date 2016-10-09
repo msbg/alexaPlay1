@@ -10,7 +10,7 @@ public class AddFirstItemConfirmYes extends AbstractTransition {
 
     @Override
     protected boolean isValidTransition(RequestContext context) {
-        return context.isIntent(IntentName.IntentYes);
+        return context.isIntent(IntentName.AMAZON_YesIntent);
     }
 
     @Override
