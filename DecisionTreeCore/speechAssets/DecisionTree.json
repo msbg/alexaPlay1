@@ -4,6 +4,9 @@
       "intent": "IntentNewGame"
     },
     {
+      "intent": "IntentResetTree"
+    },
+    {
       "intent": "IntentFreeText",
       "slots": [
         {

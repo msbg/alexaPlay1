@@ -44,10 +44,12 @@ class StateWelcome extends StateBase {
             }
         });
 
+        addTransition(new Transition(IntentName.IntentResetTree, GameState.ConfirmReset));
+
         addTransition(new Transition(IntentName.AMAZON_HelpIntent, GameState.Welcome) {
             @Override
             String getTransitionPrefix(RequestContext request) {
-                return "This could be some useful text.";
+                return "You can say Reset Tree to clear down your data.";
             }
         });
 

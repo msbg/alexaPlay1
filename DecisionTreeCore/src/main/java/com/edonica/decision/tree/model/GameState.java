@@ -12,5 +12,6 @@ public enum GameState {
     WhatQuestion,
     WhatQuestionConfirm,
     WhatIsItQuestionAnswer,
+    ConfirmReset,
     Stop
 }

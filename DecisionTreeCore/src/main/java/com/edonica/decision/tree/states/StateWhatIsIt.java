@@ -17,6 +17,6 @@ public class StateWhatIsIt extends StateBase {
 
     @Override
     public String getText(RequestContext context) {
-        return "What was it?  Add an, or a, to help me understand.";
+        return "What was it?";
     }
 }

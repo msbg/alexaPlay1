@@ -3,8 +3,9 @@ package com.edonica.decision.tree.model;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
+import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 
 import java.util.UUID;
 
@@ -35,8 +36,8 @@ public class DataNode {
     }
 
     public void save() {
-        DynamoDB dynamoDB = new DynamoDB(new AmazonDynamoDBClient());
-
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient();
+        DynamoDB dynamoDB = new DynamoDB(client);
         Table table = dynamoDB.getTable(DYNAMO_TABLE_DECISIONS);
 
         Item item = new Item()
@@ -57,6 +58,27 @@ public class DataNode {
 
         PutItemOutcome outcome = table.putItem(item);
         System.out.println("Outcome of node save : " + outcome.toString());
+    }
+
+    public void recursiveDelete() {
+        if(noId != null ) {
+            DataNode.load(this.noId).recursiveDelete();
+        }
+        if(yesId != null ) {
+            DataNode.load(yesId).recursiveDelete();
+        }
+        delete();
+    }
+
+    void delete() {
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient();
+        DynamoDB dynamoDB = new DynamoDB(client);
+        Table table = dynamoDB.getTable(DYNAMO_TABLE_DECISIONS);
+
+        DeleteItemSpec deleteItemSpec = new DeleteItemSpec()
+                .withPrimaryKey(new PrimaryKey(DYNAMO_FIELD_ID, id));
+
+        table.deleteItem(deleteItemSpec);
     }
 
     public String getId() {
@@ -134,6 +156,13 @@ public class DataNode {
 
         //If we don't have a node set, start off with the users UUID
         return load(context.getUserId());
+    }
+
+    public static void resetUser(RequestContext context) {
+        DataNode node = load(context.getUserId());
+        if( node != null ) {
+            node.recursiveDelete();
+        }
     }
 
     private static final String DYNAMO_TABLE_DECISIONS = "DecisionTrees";

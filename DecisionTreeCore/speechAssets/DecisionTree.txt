@@ -1,4 +1,5 @@
 IntentNewGame new game
+IntentResetTree reset tree
 IntentFreeText {ta}
 IntentFreeText {ta} {tb}
 IntentFreeText {ta} {tb} {tc}
