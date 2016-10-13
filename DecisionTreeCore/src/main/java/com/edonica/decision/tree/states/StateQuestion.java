@@ -14,6 +14,12 @@ public class StateQuestion extends StateBase {
                 DataNode targetChild = context.getChildNodeFromYesNoIntent();
                 return targetChild != null && !targetChild.hasChildren();
             }
+
+            @Override
+            void handleRequest(RequestContext request) {
+                DataNode targetChild = request.getChildNodeFromYesNoIntent();
+                request.setSessionString(SessionKey.DataNode, targetChild.getId() );
+            }
         });
 
         addTransition(new Transition(new IntentName[]{IntentName.AMAZON_YesIntent,IntentName.AMAZON_NoIntent}, GameState.Question){
@@ -37,6 +43,8 @@ public class StateQuestion extends StateBase {
 
     @Override
     public String getText(RequestContext request) {
+        System.out.println("Generating text for question at node " + request.getSessionString(SessionKey.DataNode));
+
         DataNode node = request.getDataNode();
         return node.getQuestion() + "?";
     }

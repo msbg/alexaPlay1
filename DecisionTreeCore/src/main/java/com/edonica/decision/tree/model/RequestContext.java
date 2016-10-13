@@ -15,6 +15,7 @@ public class RequestContext {
         this.speechlet = speechlet;
         this.request = request;
         this.session = session;
+        this.endConversation = false;
     }
 
     public String getIntentName() {
@@ -88,9 +89,6 @@ public class RequestContext {
         System.out.println("Edonica : " + s );
     }
 
-    final private DecisionTreeSpeechlet speechlet;
-    final private IntentRequest request;
-    final private Session session;
 
     public DataNode getDataNode() {
         return DataNode.fromContext(this);
@@ -125,4 +123,17 @@ public class RequestContext {
         session.removeAttribute(SessionKey.UserQuestion.toString());
         session.setAttribute(SessionKey.GameState.toString(),GameState.Welcome.toString());
     }
+
+    public boolean getEndConversation() {
+        return endConversation;
+    }
+    public void setEndConversation(boolean end) {
+        endConversation = end;
+    }
+
+    final private DecisionTreeSpeechlet speechlet;
+    final private IntentRequest request;
+    final private Session session;
+    private boolean endConversation;
+
 }

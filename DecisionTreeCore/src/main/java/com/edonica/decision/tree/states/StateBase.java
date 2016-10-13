@@ -57,7 +57,13 @@ public abstract class StateBase {
                 }
             }
         }
-        return "Sorry, I have no idea what you're talking about.";
+
+        if(intent==IntentName.AMAZON_StopIntent) {
+            request.setEndConversation(true);
+            request.setSessionString(SessionKey.GameState, GameState.Stop.toString());
+        }
+
+        return null;
     }
 
     final GameState gameState;

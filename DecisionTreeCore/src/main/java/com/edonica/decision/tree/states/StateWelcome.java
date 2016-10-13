@@ -44,10 +44,18 @@ class StateWelcome extends StateBase {
             }
         });
 
+        addTransition(new Transition(IntentName.AMAZON_HelpIntent, GameState.Welcome) {
+            @Override
+            String getTransitionPrefix(RequestContext request) {
+                return "This could be some useful text.";
+            }
+        });
+
+
     }
 
     @Override
     public String getText(RequestContext context) {
-        return "Say New Game to play";
+        return "Say New Game to play, Stop to Stop or Help for more options";
     }
 }

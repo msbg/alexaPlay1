@@ -10,7 +10,7 @@ public class SpeechHelpers {
 
     static public SpeechletResponse makeFullFatResponse(String speechText) {
         SimpleCard card = new SimpleCard();
-        card.setTitle("Thing Guesser");
+        card.setTitle("Thing ");
         card.setContent(speechText);
 
         // Create the plain text output.
