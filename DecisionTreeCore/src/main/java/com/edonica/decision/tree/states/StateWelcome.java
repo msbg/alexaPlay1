@@ -28,7 +28,7 @@ class StateWelcome extends StateBase {
 
             @Override
             String getTransitionPrefix(RequestContext request) {
-                return "Well I only know one thing right now so this game will be quite short.  Please think of an object and answer this question.";
+                return "I only know one thing right now so this game will be quite short.  Please think of an object and answer this question.";
             }
         });
 
@@ -49,7 +49,7 @@ class StateWelcome extends StateBase {
         addTransition(new Transition(IntentName.AMAZON_HelpIntent, GameState.Welcome) {
             @Override
             String getTransitionPrefix(RequestContext request) {
-                return "You can say Reset Tree to clear down your data.";
+                return "You can say Reset Tree to clear down your data.  If you're building a large tree it helps to start by thinking of very different objects and asking very generic questions first as these will stay at the top.";
             }
         });
 

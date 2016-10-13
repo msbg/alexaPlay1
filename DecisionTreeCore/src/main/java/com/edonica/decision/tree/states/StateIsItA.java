@@ -13,6 +13,9 @@ public class StateIsItA extends StateBase {
             String getTransitionPrefix(RequestContext request) {
                 return "Great!";
             }
+
+            @Override
+            boolean isReset() {return true; }
         });
     }
 
