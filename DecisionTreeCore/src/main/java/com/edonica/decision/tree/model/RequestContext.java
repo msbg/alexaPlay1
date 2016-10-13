@@ -127,6 +127,7 @@ public class RequestContext {
     public boolean getEndConversation() {
         return endConversation;
     }
+
     public void setEndConversation(boolean end) {
         endConversation = end;
     }

@@ -3,7 +3,6 @@ package com.edonica.decision.tree;
 import com.amazon.speech.speechlet.*;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
-import com.amazon.speech.ui.SimpleCard;
 import com.edonica.decision.tree.model.*;
 import com.edonica.decision.tree.states.StateBase;
 import com.edonica.decision.tree.states.StateRegistry;
@@ -81,6 +80,4 @@ public class DecisionTreeSpeechlet implements Speechlet {
     public void onSessionEnded(SessionEndedRequest request, Session session) throws SpeechletException {
         System.out.println("Edonica Session End : " + request.toString() + ":" + session.toString());
     }
-
-
 }

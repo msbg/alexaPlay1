@@ -1,6 +1,5 @@
 package com.edonica.decision.tree.states;
 
-import com.amazon.speech.speechlet.SpeechletResponse;
 import com.edonica.decision.tree.model.GameState;
 import com.edonica.decision.tree.model.IntentName;
 import com.edonica.decision.tree.model.RequestContext;

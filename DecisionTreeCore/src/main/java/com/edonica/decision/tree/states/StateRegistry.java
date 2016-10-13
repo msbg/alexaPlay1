@@ -1,7 +1,5 @@
 package com.edonica.decision.tree.states;
 
-import com.amazon.speech.speechlet.SpeechletResponse;
-import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.edonica.decision.tree.model.*;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
@@ -33,8 +31,7 @@ public class StateRegistry {
     }
 
     public StateBase getState(GameState from) {
-        StateBase state = stateMap.get(from);
-        return state;
+        return stateMap.get(from);
     }
 
     public Map<GameState, StateBase> getStateMap() {

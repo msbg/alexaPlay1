@@ -14,13 +14,6 @@ public class DataNode {
         return yesId != null && noId != null;
     }
 
-    private static final String DYNAMO_TABLE_DECISIONS = "DecisionTrees";
-    private static final String DYNAMO_FIELD_ID = "ID";
-    private static final String DYNAMO_FIELD_VALUE = "Value";
-    private static final String DYNAMO_FIELD_QUESTION = "Question";
-    private static final String DYNAMO_FIELD_YES_ID = "YesId";
-    private static final String DYNAMO_FIELD_NO_ID = "NoId";
-
     public void addAlternative( String userQuestion, String userAnimal, boolean answerForUserAnimal)
     {
         //Create our two child nodes
@@ -142,4 +135,11 @@ public class DataNode {
         //If we don't have a node set, start off with the users UUID
         return load(context.getUserId());
     }
+
+    private static final String DYNAMO_TABLE_DECISIONS = "DecisionTrees";
+    private static final String DYNAMO_FIELD_ID = "ID";
+    private static final String DYNAMO_FIELD_VALUE = "Value";
+    private static final String DYNAMO_FIELD_QUESTION = "Question";
+    private static final String DYNAMO_FIELD_YES_ID = "YesId";
+    private static final String DYNAMO_FIELD_NO_ID = "NoId";
 }

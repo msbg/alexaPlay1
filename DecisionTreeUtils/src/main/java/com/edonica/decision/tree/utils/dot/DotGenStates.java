@@ -1,10 +1,8 @@
 package com.edonica.decision.tree.utils.dot;
 
 
-import com.edonica.decision.tree.model.AbstractTransition;
 import com.edonica.decision.tree.model.GameState;
 import com.edonica.decision.tree.model.IntentName;
-import com.edonica.decision.tree.model.TransitionRegistry;
 import com.edonica.decision.tree.states.StateBase;
 import com.edonica.decision.tree.states.StateRegistry;
 import com.edonica.decision.tree.states.Transition;
@@ -12,7 +10,6 @@ import com.edonica.decision.tree.states.Transition;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 public class DotGenStates {

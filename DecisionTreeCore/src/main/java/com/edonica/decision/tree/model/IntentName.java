@@ -7,5 +7,4 @@ public enum IntentName {
     AMAZON_NoIntent,
     AMAZON_HelpIntent,
     AMAZON_StopIntent
-
 }
