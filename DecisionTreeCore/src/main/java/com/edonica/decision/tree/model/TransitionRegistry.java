@@ -57,9 +57,9 @@ public class TransitionRegistry {
                     speech.setText("Byeeee.  See ya!");
                     return SpeechletResponse.newTellResponse(speech);
                 } else if( request.isIntent(IntentName.AMAZON_HelpIntent)) {
-                    return SpeechHelpers.makeFullFatResponse(StateHelp.getHelpText(from));
+                    return SpeechHelpers.makeFullFatResponse("Help not available");
                 } else {
-                    return SpeechHelpers.makeFullFatResponse(StateHelp.getFailText(from));
+                    return SpeechHelpers.makeFullFatResponse("Sorry, I can't do that dave");
                 }
             }
         };

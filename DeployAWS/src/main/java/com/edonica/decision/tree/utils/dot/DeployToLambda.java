@@ -17,21 +17,26 @@ public class DeployToLambda {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Got file of:" + args[0]);
-        //File toUpload = new File("C:\\Users\\me\\IdeaProjects\\lambatest1\\DecisionTreeCore\\target", "DecisionTreeCore-1.0-SNAPSHOT.jar");
-        File toUpload = new File(args[0]);
-
-        ByteBuffer byteBuff = ByteBuffer.wrap(IOUtils.toByteArray(new FileInputStream(toUpload)));
-
+        String inputFile = args[0];
+        System.out.println("Reading input JAR : " + inputFile );
+        byte[] byteArray = IOUtils.toByteArray(new FileInputStream(new File(inputFile)));
+        ByteBuffer byteBuff = ByteBuffer.wrap(byteArray);
+        System.out.println("Read bytes :" +  byteArray.length);
 
         AWSLambda awsLambda = AWSLambdaClientBuilder.standard().withRegion(Regions.US_EAST_1)
                 .build();
+
+
+        String functionName = "AlexaDecisionTreeSpeechlet";
+        System.out.println("Uploading to function : " + functionName);
         UpdateFunctionCodeRequest updateFunctionCodeRequest = new UpdateFunctionCodeRequest();
-        updateFunctionCodeRequest.setFunctionName("AlexaDecisionTreeSpeechlet");
+        updateFunctionCodeRequest.setFunctionName(functionName);
         updateFunctionCodeRequest.setZipFile(byteBuff);
         UpdateFunctionCodeResult result = awsLambda.updateFunctionCode(updateFunctionCodeRequest);
-        System.out.println(result.toString());
+        System.out.println("Upload result : " + result.toString());
+
         awsLambda.shutdown();
 
+        System.out.println("Lambda shutdown done");
     }
 }

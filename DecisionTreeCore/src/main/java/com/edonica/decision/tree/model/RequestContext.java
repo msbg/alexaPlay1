@@ -11,8 +11,6 @@ import java.util.*;
 
 public class RequestContext {
 
-    private DataNode dataNode;
-
     public RequestContext(DecisionTreeSpeechlet speechlet, IntentRequest request, Session session) {
         this.speechlet = speechlet;
         this.request = request;
@@ -61,6 +59,10 @@ public class RequestContext {
         return IntentName.valueOf(getIntentName()) == intent;
     }
 
+    public IntentName getIntent() {
+        return IntentName.valueOf(getIntentName());
+    }
+
     public String getStringFromComponents() {
         Intent intent = request.getIntent();
 
@@ -91,7 +93,7 @@ public class RequestContext {
     final private Session session;
 
     public DataNode getDataNode() {
-        return dataNode;
+        return DataNode.fromContext(this);
     }
 
     public DataNode getChildNodeFromYesNoIntent() {
@@ -107,12 +109,12 @@ public class RequestContext {
         return DataNode.load(childId);
     }
 
-    public void setDataNode(DataNode dataNode) {
-        this.dataNode = dataNode;
-    }
-
     public String getUserId() {
         return session.getUser().getUserId();
+    }
+
+    public GameState getGameState() {
+        return GameState.valueOf(getSessionString(SessionKey.GameState));
     }
 
     public void resetState() {
@@ -121,5 +123,6 @@ public class RequestContext {
         session.removeAttribute(SessionKey.DataNode.toString());
         session.removeAttribute(SessionKey.ObjectName.toString());
         session.removeAttribute(SessionKey.UserQuestion.toString());
+        session.setAttribute(SessionKey.GameState.toString(),GameState.Welcome.toString());
     }
 }

@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class DotGen {
+public class DotGenTransitions {
 
     public static void main(String args[]) {
-        DotGen dotGen = new DotGen();
+        DotGenTransitions dotGen = new DotGenTransitions();
         dotGen.generate();
 
     }
@@ -36,7 +36,7 @@ public class DotGen {
         }
         buff.append("}");
 
-        try(FileWriter fw = new FileWriter(new File("DecisionTree.dot"))) {
+        try(FileWriter fw = new FileWriter(new File("DecisionTree.Transitions.dot"))) {
             fw.write(buff.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
