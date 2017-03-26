@@ -13,6 +13,7 @@
         <module>DecisionTreeUtils</module>
         <module>DeployAWS</module>
         <module>SomfyProtcol</module>
+        <module>ghostgame</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
