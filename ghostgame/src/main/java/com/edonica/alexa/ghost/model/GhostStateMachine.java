@@ -122,12 +122,7 @@ public class GhostStateMachine {
     }
 
     private Character getNextLetter() {
-        String word = words.getPossibleWord(ghostStateContext.getWordSoFar());
-        if(word.length()>ghostStateContext.getWordSoFar().length()) {
-            String nextLetter = word.substring(ghostStateContext.getWordSoFar().length());
-            return nextLetter.toCharArray()[0];
-        }
-        return null;
+        return words.getNextPossibleLetter(this.ghostStateContext.getWordSoFar());
     }
 
     private boolean isWord() {
